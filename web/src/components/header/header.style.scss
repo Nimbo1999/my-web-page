@@ -1,0 +1,10 @@
+.app-header {
+  height: 100px;
+  text-transform: uppercase;
+  .app-nav-bar {
+    font-weight: 500;
+    .app-header-item {
+      padding: 0px 15px;
+    }
+  }
+}
