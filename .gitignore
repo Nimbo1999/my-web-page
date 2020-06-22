@@ -21,3 +21,6 @@
 /webnpm-debug.log*
 /webyarn-debug.log*
 /webyarn-error.log*
+
+# Firebase
+firebase.js
