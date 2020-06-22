@@ -1,31 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import Profile from '../lopesProfile/profile.component';
-import firebase from '../../firebase';
+// Redux
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { selectBanner } from '../../store/banner/banner.selector'
+import { getProfileData } from '../../store/banner/banner.actions'
 import './banner.style.scss';
 
-const Banner = () => {
+const Banner = ({ banner, getProfileData }) => {
 
-    const [dados, setDados] = React.useState();
-    const [initializing, setInitializing] = React.useState(true);
+    const { profiles, loading } = banner
 
-    React.useEffect(() => {
-        firebase.firestore().collection("dadosDinamicos").doc('paginaDevLopes')
-            .get().then(doc => {
-                if(doc.exists) {
-                    const { banner } = doc.data();
+    useEffect(() => {
+        getProfileData()
+    }, [getProfileData]);
 
-                    setDados(banner);
-                    setInitializing(false);
-                } else {
-                    console.error("Documento não foi encontrado!");
-                }
-            });
-    }, [setDados, setInitializing]);
-
-    if(initializing)
+    if(loading)
         return (
             <Container className="bannerContainer" fluid>
                 <Row>
@@ -41,9 +34,9 @@ const Banner = () => {
             <Container className="bannerContainer" fluid>
                 <Row>
                     {
-                        dados.map(item => {
+                        profiles.map((item, key) => {
                             return(
-                                <Col md={6} sm={12}>
+                                <Col md={6} sm={12} key={key}>
                                     <Profile nome={item.title} imagem={item.image} skills={item.skills} />
                                 </Col>
                             )
@@ -54,4 +47,12 @@ const Banner = () => {
         )
 }
 
-export default Banner;
+const mapStateToProps = createStructuredSelector({
+    banner: selectBanner
+})
+
+const mapDispatchToProps = dispatch => ({
+    getProfileData: () => dispatch(getProfileData())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Banner);

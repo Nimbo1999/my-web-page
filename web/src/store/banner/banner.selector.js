@@ -1,0 +1,1 @@
+export const selectBanner = state => state.banner

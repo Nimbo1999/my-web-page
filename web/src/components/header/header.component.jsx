@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <Navbar expand='md' bg='dark' variant='dark' className='app-header'>
       <Container>
-        <Brand>Dev Lopes</Brand>
+        <Brand className='brand-h1'>Dev Lopes</Brand>
         <Toggle />
         <Collapse className='justify-content-end app-nav-bar'>
           <Nav variant='pills' >
@@ -19,10 +19,10 @@ const Header = () => {
               <Link>Home</Link>
             </Item>
             <Item className='app-header-item'>
-              <Link>Sobre mim</Link>
+              <Link>Sobre Nós</Link>
             </Item>
             <Item className='app-header-item'>
-              <Link>Carreira</Link>
+              <Link>Contato</Link>
             </Item>
           </Nav>
         </Collapse>

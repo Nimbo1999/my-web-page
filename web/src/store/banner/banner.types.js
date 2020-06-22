@@ -1,0 +1,5 @@
+export const bannerTypes = {
+  SET_PROFILES: 'SET_PROFILES',
+  SET_LOADING: 'SET_LOADING',
+  UNSET_LOADING: 'UNSET_LOADING'
+}
